@@ -37,8 +37,34 @@ function getIntervalArray(/* start, end */) {
  *    sumArrays([10, 20, 30], [5, 10, 15]) => [15, 30, 45]
  *    sumArrays([-1, 0, 1], [1, 2, 3, 4]) => [0, 2, 4, 4]
  */
-function sumArrays(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function sumArrays(arr1, arr2) {
+  let maxLengthArrays = 0;
+  if (arr1.length === arr2.length) {
+    maxLengthArrays = arr1.length;
+  } else if (arr1.length > arr2.length) {
+    maxLengthArrays = arr1.length;
+  } else {
+    maxLengthArrays = arr2.length;
+  }
+
+  function addZeroToArray(arr, maxLength) {
+    const copyArr = arr;
+    if (copyArr.length < maxLength) {
+      copyArr.push(0);
+      addZeroToArray(copyArr, maxLength);
+    }
+    return copyArr;
+  }
+
+  const copyArr1 = addZeroToArray(arr1, maxLengthArrays);
+  const copyArr2 = addZeroToArray(arr2, maxLengthArrays);
+  const result = [];
+  result.length = maxLengthArrays;
+  result.fill(null);
+
+  return result.map((item, index) => {
+    return copyArr1[index] + copyArr2[index];
+  });
 }
 
 /**
