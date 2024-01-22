@@ -299,8 +299,10 @@ function toStringList(arr) {
  *   distinct([ 1, 1, 2, 2, 3, 3, 4, 4]) => [ 1, 2, 3, 4]
  *   distinct([]) => []
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  // Set - коллекция уникальных значений
+  const newSet = new Set(arr);
+  return Array.from(newSet);
 }
 
 /**
