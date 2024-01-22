@@ -473,7 +473,12 @@ function generateOdds(len) {
  *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
  */
 function getElementByIndices(arr, indices) {
-  return arr[indices[0]][indices[1]];
+  let newArr = arr;
+  indices.map((itemOfIndices) => {
+    newArr = newArr.at(itemOfIndices);
+    return null;
+  });
+  return newArr;
 }
 
 /**
