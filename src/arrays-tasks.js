@@ -401,8 +401,33 @@ function calculateBalance(arr) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
+function createChunks(arr, chunkSize) {
+  const copyArr = arr;
+  function cutChunk(sizeOfCutChunk) {
+    const newArr = [];
+    newArr.length = sizeOfCutChunk;
+    newArr.fill(null);
+    return newArr.map(() => {
+      return copyArr.shift();
+    });
+  }
+
+  const result = [];
+
+  function disassembleCopyArr() {
+    result.push(cutChunk(chunkSize));
+    if (copyArr.length >= chunkSize) {
+      disassembleCopyArr();
+    }
+    return null;
+  }
+
+  disassembleCopyArr();
+
+  if (copyArr.length > 0) {
+    result.push(copyArr);
+  }
+  return result;
 }
 
 /**
